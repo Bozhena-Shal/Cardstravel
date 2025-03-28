@@ -1,5 +1,5 @@
 {
-  "name": "webapp",
+  "name": "@cardstravel/webapp",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -11,6 +11,10 @@
     "prettify": "prettier --log-level warn --cache --write src/**/*.{ts,tsx,js,json,yml,scss} !**/{node_modules,dist}/**/*"
   },
   "dependencies": {
+    "@cardstravel/backend": "workspace:*",
+    "@tanstack/react-query": "^5.69.3",
+    "@trpc/client": "^11.0.0",
+    "@trpc/react-query": "^11.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
