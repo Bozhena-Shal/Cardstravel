@@ -14,7 +14,7 @@ export const AllCardsPage = () => {
     return <span>No data available.</span>
   }
 
-return (
+  return (
     <div>
       <h1>All Ideas</h1>
       {data.cards.map((card) => (
@@ -26,9 +26,3 @@ return (
     </div>
   )
 }
-
-
-  
-   
-
-  

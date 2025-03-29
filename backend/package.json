@@ -1,22 +1,29 @@
 {
     "name": "@cardstravel/backend",
     "private": true,
+    "type": "module",
     "version": "0.0.0",
     "scripts": {
         "dev": "ts-node-dev --rs ./src/index.ts",
         "build": "rimraf ./dist && tsc --build ./tsconfig.json",
         "start": "node ./dist/index.js",
         "types": "tsc --noEmit --project ./tsconfig.json",
+        "lint": "eslint --cache --cache-location ./node_modules/.cache/.eslintcache --fix --ext .ts .",
         "prettify": "prettier --log-level warn --cache --write src/**/*.{ts,tsx,js,json,yml,scss} !**/{node_modules,dist}/**/*"
     },
     "dependencies": {
         "@trpc/server": "^11.0.0",
-        
         "cors": "^2.8.5",
         "express": "^4.21.2"
     },
     "devDependencies": {
+        "@eslint/js": "^9.21.0",
+        "@types/cors": "^2.8.17",
         "@types/express": "^5.0.1",
-        "@types/node": "^22.13.14"
+        "@types/node": "^22.13.14",
+        "eslint": "^9.23.0",
+        "eslint-plugin-react": "^7.37.4",
+        "globals": "^16.0.0",
+        "typescript-eslint": "^8.24.0"
     }
 }
