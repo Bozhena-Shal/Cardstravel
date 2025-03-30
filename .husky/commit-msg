@@ -1,5 +1,4 @@
 
-Extract the relevant line from the COMMIT_EDITMSG
 relevant_line=$(awk '/^# ------------------------ >8 ------------------------/{exit} !/^#/ && NF {print; exit}' "$1")
 
 # If no relevant line is found, just leave the commit message unchanged
