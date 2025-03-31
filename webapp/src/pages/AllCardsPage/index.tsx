@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+import { getViewCardsRoute } from '../../lib/routes'
 import { trpc } from '../../lib/trpc'
 
 export const AllCardsPage = () => {
@@ -10,6 +12,7 @@ export const AllCardsPage = () => {
   if (isError) {
     return <span>Error: {error.message}</span>
   }
+
   if (!data) {
     return <span>No data available.</span>
   }
@@ -19,7 +22,9 @@ export const AllCardsPage = () => {
       <h1>All Ideas</h1>
       {data.cards.map((card) => (
         <div key={card.nick}>
-          <h2>{card.name}</h2>
+          <h2>
+            <Link to={getViewCardsRoute({ cardNick: card.nick })}>{card.name}</Link>
+          </h2>
           <p>{card.description}</p>
         </div>
       ))}
