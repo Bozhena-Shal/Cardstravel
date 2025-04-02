@@ -15,12 +15,14 @@
     "@trpc/server": "^11.0.0",
     "cors": "^2.8.5",
     "express": "^4.21.2",
+    "lodash": "^4.17.21",
     "tsx": "^4.19.3"
   },
   "devDependencies": {
     "@eslint/js": "^9.21.0",
     "@types/cors": "^2.8.17",
     "@types/express": "^5.0.1",
+    "@types/lodash": "^4.17.16",
     "@types/node": "^22.13.14",
     "eslint": "^9.23.0",
     "eslint-plugin-react": "^7.37.4",
