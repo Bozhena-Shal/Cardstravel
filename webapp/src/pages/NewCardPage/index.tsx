@@ -1,6 +1,5 @@
 import css from './index.module.scss'
-
-export const NewIdeaPage = () => {
+export const NewCardPage = () => {
   return (
     <div>
       <h1 className={css.title}>New Card</h1>

@@ -1,8 +1,9 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { Layout } from './components/Layout'
-import { getAllCardsRoute, getViewCardsRoute } from './lib/routes'
+import * as routes from './lib/routes'
 import { TrpcProvider } from './lib/trpc'
 import { AllCardsPage } from './pages/AllCardsPage'
+import { NewCardPage } from './pages/NewCardPage'
 import { ViewCardsPage } from './pages/ViewCardsPage'
 import './styles/global.scss'
 
@@ -12,8 +13,9 @@ export const App = () => {
       <BrowserRouter>
         <Routes>
           <Route element={<Layout />}>
-            <Route path={getAllCardsRoute()} element={<AllCardsPage />} />
-            <Route path={getViewCardsRoute({ cardNick: ':cardNick' })} element={<ViewCardsPage />} />
+            <Route path={routes.getAllCardsRoute()} element={<AllCardsPage />} />
+            <Route path={routes.getViewCardsRoute(routes.viewCardRouteParams)} element={<ViewCardsPage />} />
+            <Route path={routes.getNewCardRoute()} element={<NewCardPage />} />
           </Route>
         </Routes>
       </BrowserRouter>
