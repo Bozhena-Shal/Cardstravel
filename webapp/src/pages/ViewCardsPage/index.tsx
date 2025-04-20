@@ -1,4 +1,5 @@
 import { useParams } from 'react-router-dom'
+import { Segment } from '../../components/Segment'
 import { trpc } from '../../lib/trpc'
 import css from './index.module.scss'
 
@@ -22,10 +23,8 @@ export const ViewCardsPage = () => {
   }
 
   return (
-    <div>
-      <h1 className={css.title}>{data.card.name}</h1>
-      <p className={css.description}>{data.card.description}</p>
+    <Segment title={data.card.name} description={data.card.description}>
       <div className={css.text} dangerouslySetInnerHTML={{ __html: data.card.text }} />
-    </div>
+    </Segment>
   )
 }

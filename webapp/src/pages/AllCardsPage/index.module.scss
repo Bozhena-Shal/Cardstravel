@@ -1,10 +1,6 @@
 @use '../../styles/vars' as *;
 @use '../../styles/mixins' as *;
 
-.title {
-  @include h1;
-}
-
 .cards {
   .card {
     padding: 20px;
@@ -14,16 +10,8 @@
       margin-top: 20px;
     }
 
-    .cardName {
-      @include h2;
-
-      .cardLink {
-        @include link;
-      }
-    }
-
-    .cardDescription {
-      font-size: 18px;
+    .cardLink {
+      @include link;
     }
   }
 }
