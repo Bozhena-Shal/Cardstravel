@@ -142,9 +142,6 @@ importers:
       reset-css:
         specifier: ^5.0.2
         version: 5.0.2
-      sass:
-        specifier: ^1.86.2
-        version: 1.86.2
     devDependencies:
       '@eslint/js':
         specifier: ^9.21.0
@@ -157,7 +154,7 @@ importers:
         version: 19.0.4(@types/react@19.0.12)
       '@vitejs/plugin-react':
         specifier: ^4.3.4
-        version: 4.3.4(vite@6.2.3(@types/node@22.13.14)(sass@1.86.2)(tsx@4.19.3)(yaml@2.7.1))
+        version: 4.3.4(vite@6.2.3(@types/node@22.13.14)(sass@1.86.3)(tsx@4.19.3)(yaml@2.7.1))
       eslint-config-prettier:
         specifier: ^10.1.1
         version: 10.1.1(eslint@9.23.0)
@@ -170,6 +167,9 @@ importers:
       prettier:
         specifier: ^3.5.3
         version: 3.5.3
+      sass:
+        specifier: ^1.86.3
+        version: 1.86.3
       stylelint:
         specifier: ^16.18.0
         version: 16.18.0(typescript@5.8.2)
@@ -181,7 +181,7 @@ importers:
         version: 14.0.0(postcss@8.5.3)(stylelint@16.18.0(typescript@5.8.2))
       vite:
         specifier: ^6.2.0
-        version: 6.2.3(@types/node@22.13.14)(sass@1.86.2)(tsx@4.19.3)(yaml@2.7.1)
+        version: 6.2.3(@types/node@22.13.14)(sass@1.86.3)(tsx@4.19.3)(yaml@2.7.1)
 
 packages:
 
@@ -3717,6 +3717,11 @@ packages:
     engines: {node: '>=14.0.0'}
     hasBin: true
 
+  sass@1.86.3:
+    resolution: {integrity: sha512-iGtg8kus4GrsGLRDLRBRHY9dNVA78ZaS7xr01cWnS7PEMQyFtTqBiyCrfpTYTZXRWM94akzckYjh8oADfFNTzw==}
+    engines: {node: '>=14.0.0'}
+    hasBin: true
+
   scheduler@0.25.0:
     resolution: {integrity: sha512-xFVuu11jh+xcO7JOAGJNOXld8/TcEHK/4CituBUeUb5hqxJLj9YuemAEuvm9gQ/+pgXYfbQuqAkiYu+u7YEsNA==}
 
@@ -5922,14 +5927,14 @@ snapshots:
 
   '@ungap/structured-clone@1.3.0': {}
 
-  '@vitejs/plugin-react@4.3.4(vite@6.2.3(@types/node@22.13.14)(sass@1.86.2)(tsx@4.19.3)(yaml@2.7.1))':
+  '@vitejs/plugin-react@4.3.4(vite@6.2.3(@types/node@22.13.14)(sass@1.86.3)(tsx@4.19.3)(yaml@2.7.1))':
     dependencies:
       '@babel/core': 7.26.10
       '@babel/plugin-transform-react-jsx-self': 7.25.9(@babel/core@7.26.10)
       '@babel/plugin-transform-react-jsx-source': 7.25.9(@babel/core@7.26.10)
       '@types/babel__core': 7.20.5
       react-refresh: 0.14.2
-      vite: 6.2.3(@types/node@22.13.14)(sass@1.86.2)(tsx@4.19.3)(yaml@2.7.1)
+      vite: 6.2.3(@types/node@22.13.14)(sass@1.86.3)(tsx@4.19.3)(yaml@2.7.1)
     transitivePeerDependencies:
       - supports-color
 
@@ -8346,6 +8351,14 @@ snapshots:
     optionalDependencies:
       '@parcel/watcher': 2.5.1
 
+  sass@1.86.3:
+    dependencies:
+      chokidar: 4.0.3
+      immutable: 5.1.1
+      source-map-js: 1.2.1
+    optionalDependencies:
+      '@parcel/watcher': 2.5.1
+
   scheduler@0.25.0: {}
 
   semver-greatest-satisfied-range@2.0.0:
@@ -8963,7 +8976,7 @@ snapshots:
       replace-ext: 2.0.0
       teex: 1.0.1
 
-  vite@6.2.3(@types/node@22.13.14)(sass@1.86.2)(tsx@4.19.3)(yaml@2.7.1):
+  vite@6.2.3(@types/node@22.13.14)(sass@1.86.3)(tsx@4.19.3)(yaml@2.7.1):
     dependencies:
       esbuild: 0.25.1
       postcss: 8.5.3
@@ -8971,7 +8984,7 @@ snapshots:
     optionalDependencies:
       '@types/node': 22.13.14
       fsevents: 2.3.3
-      sass: 1.86.2
+      sass: 1.86.3
       tsx: 4.19.3
       yaml: 2.7.1
 
