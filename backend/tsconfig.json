@@ -38,9 +38,13 @@
 
     "lib": ["ES2021"],
 
-    "module": "Node16",
+    "baseUrl": ".",
 
-    "moduleResolution": "node16",
+    "paths": {
+      "*": ["*", "*.ts", "*.js"]
+    },
+
+    "module": "CommonJS",
 
     "target": "ESNext"
   },

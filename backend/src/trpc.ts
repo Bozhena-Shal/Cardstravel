@@ -1,30 +1,17 @@
-import { initTRPC } from '@trpc/server'
-import _ from 'lodash'
-import { z } from 'zod'
+// // import type { TrpcRouter } from '@cardstravel/backend/src/router'
 
-const cards = _.times(100, (i) => ({
-  nick: `cool-card-nick-${i}`,
-  name: `Card ${i}`,
-  description: `Description of card ${i}...`,
-  text: _.times(100, (j) => `<p>Text paragrph ${j} of idea ${i}...</p>`).join(''),
-}))
+// import _ from "lodash"
+// import { cards } from "./lib/cards.js"
+// import { trpc } from "./lib/trpc.js"
 
-const trpc = initTRPC.create()
+// // import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+// // import { httpBatchLink } from '@trpc/client'
+// // import { createTRPCReact } from '@trpc/react-query'
 
-export const trpcRouter = trpc.router({
-  getCards: trpc.procedure.query(() => {
-    return { cards: cards.map((card) => _.pick(card, ['nick', 'name', 'description'])) }
-  }),
-  getCard: trpc.procedure
-    .input(
-      z.object({
-        cardNick: z.string(),
-      })
-    )
-    .query(({ input }) => {
-      const card = cards.find((card) => card.nick === input.cardNick)
-      return { card: card || null }
-    }),
-})
+// export const trpcRouter = trpc.router({
+//   getCards: trpc.procedure.query(() => {
+//     return { cards: cards.map((card) => _.pick(card, ['nick', 'name', 'description'])) }
+//   }),
+// })
 
-export type TrpcRouter = typeof trpcRouter
+// export type TrpcRouter = typeof trpcRouter
