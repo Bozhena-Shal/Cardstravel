@@ -2,10 +2,12 @@
 @use '../../styles/mixins' as *;
 
 .field {
+  //  как класс в классе field >> disabled
   &.disabled {
     opacity: 0.5;
   }
 
+  // есть класс field, а где то внутри него еще есть класс label
   .label {
     font-weight: bold;
     margin-bottom: 2px;
@@ -22,6 +24,7 @@
     width: 100%;
     max-width: 200px;
 
+    // двоеточие = псевдокласс
     &:focus {
       border-color: $blue;
     }
