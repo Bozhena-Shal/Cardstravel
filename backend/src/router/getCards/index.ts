@@ -1,7 +1,14 @@
-import _ from 'lodash'
-import { cards } from '../../lib/cards.js'
 import { trpc } from '../../lib/trpc.js'
 
-export const getCardsTrpcRoute = trpc.procedure.query(() => {
-  return { cards: cards.map((card) => _.pick(card, ['nick', 'name', 'description'])) }
+export const getCardsTrpcRoute = trpc.procedure.query(async ({ ctx }) => {
+  const cards = await ctx.prisma.card.findMany({
+    select: {
+      id: true,
+      nick: true,
+      name: true,
+      description: true,
+    },
+  })
+
+  return { cards }
 })
