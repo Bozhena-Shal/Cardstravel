@@ -1,11 +1,17 @@
-import { cards } from '../../lib/cards'
-import { trpc } from '../../lib/trpc'
-import { zCreateCardTrpcInput } from './input'
+import { trpc } from '../../lib/trpc.js'
+import { zCreateCardTrpcInput } from './input.js'
 
-export const createCardTrpcRoute = trpc.procedure.input(zCreateCardTrpcInput).mutation(({ input }) => {
-  if (cards.find((card) => card.nick === input.nick)) {
+export const createCardTrpcRoute = trpc.procedure.input(zCreateCardTrpcInput).mutation(async ({ input, ctx }) => {
+  const exCard = await ctx.prisma.card.findUnique({
+    where: {
+      nick: input.nick,
+    },
+  })
+  if (exCard) {
     throw Error('Card with this nick already exists')
   }
-  cards.unshift(input)
+  await ctx.prisma.card.create({
+    data: input,
+  })
   return true
 })

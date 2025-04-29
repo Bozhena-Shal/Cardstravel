@@ -28,7 +28,7 @@ export default [
   {
     settings: {
       react: {
-        version: "19.0.0", // Автоматически определяет версию React
+        version: '19.2.0', // Автоматически определяет версию React
       },
     },
   },

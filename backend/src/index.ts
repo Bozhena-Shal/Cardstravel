@@ -1,10 +1,8 @@
-// import * as trpcExpress from '@trpc/server/adapters/express'
 import cors from 'cors'
 import express from 'express'
 import { type AppContext, createAppContext } from './lib/ctx.js'
 import { applyTrpcToExpressApp } from './lib/trpc.js'
 import { trpcRouter } from './router/index.js'
-
 void (async () => {
   let ctx: AppContext | null = null
   try {
@@ -23,3 +21,10 @@ void (async () => {
     await ctx?.stop()
   }
 })()
+
+// if (needModule) {
+//   import('my-module').then((module) => {
+//   module.doSomething()
+//    })
+//  }
+// пример динамического импорта
