@@ -8,3 +8,7 @@ export const getViewCardsRoute = ({ cardNick }: { cardNick: string }) => `/cards
 export const viewCardRouteParams = getRouteParams({ cardNick: true })
 
 export const getNewCardRoute = () => '/cards/new'
+
+export const getSignUpRoute = () => '/sign-up'
+
+export const getSignInRoute = () => '/sign-in'
