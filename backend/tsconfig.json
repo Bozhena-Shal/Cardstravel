@@ -14,5 +14,5 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true
   },
-  "include": ["src/**/*.ts", "src/lib/ctx.js", "src/index.js"]
+  "include": ["src/**/*.ts", "src/lib/ctx.js", "src/index.js", "env.ts"]
 }

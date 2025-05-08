@@ -14,6 +14,13 @@ export default [
     rules: {
       'react/react-in-jsx-scope': 'off', // React 17+ не требует импортировать React
       //   'jsx-a11y/anchor-is-valid': 'off',
+      'no-restricted-syntax': [
+        'error',
+        {
+          selector: '[object.type=MetaProperty][property.name=env]',
+          message: 'Use instead import { env } from "lib/env"',
+        },
+      ],
     },
   },
 

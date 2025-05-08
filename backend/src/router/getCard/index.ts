@@ -12,6 +12,19 @@ export const getCardTrpcRoute = trpc.procedure
       where: {
         nick: input.cardNick,
       },
+      include: {
+        author: {
+          select: {
+            id: true,
+            nick: true,
+          },
+        },
+      },
     })
+
+    if (!card) {
+      throw new Error('Card not found')
+    }
+
     return { card }
   })

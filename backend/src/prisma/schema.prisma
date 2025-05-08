@@ -12,6 +12,7 @@ model User {
   nick        String @unique
   password    String
   creatAt     DateTime @default(now())
+  cards        Card[]
 }
 
 model Card {
@@ -21,4 +22,7 @@ model Card {
   description String
   text        String
   createdAt   DateTime @default(now())
+  authorId    String
+  author      User     @relation(fields: [authorId], references: [id])
+
 }

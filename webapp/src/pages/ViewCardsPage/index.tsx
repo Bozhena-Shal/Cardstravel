@@ -26,6 +26,7 @@ export const ViewCardsPage = () => {
   return (
     <Segment title={data.card.name} description={data.card.description}>
       <div className={css.createdAt}>Created At: {format(data.card.createdAt, 'yyyy-MM-dd')}</div>
+      <div className={css.author}>Author: {data.card.author.nick}</div>
       <div className={css.text} dangerouslySetInnerHTML={{ __html: data.card.text }} />
     </Segment>
   )
