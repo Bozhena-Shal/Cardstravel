@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "lint": "echo \"Linting temporarily disabled\" && exit 0",
+    "lint": "eslint --cache --cache-location ./node_modules/.cache/.eslintcache --ext .ts,.tsx .",
     "stylelint": "stylelint --cache --cache-location \"'./node_modules/.cache/.stylelintcache'\" \"src/**/*.scss\" --fix",
     "stylecheck": "sass --update -q ./src:./node_modules/.cache/.stylecheckcache",
     "preview": "vite preview",
