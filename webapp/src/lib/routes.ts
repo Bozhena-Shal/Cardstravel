@@ -7,6 +7,10 @@ export const getViewCardsRoute = ({ cardNick }: { cardNick: string }) => `/cards
 
 export const viewCardRouteParams = getRouteParams({ cardNick: true })
 
+export const editCardRouteParams = getRouteParams({ cardNick: true })
+export type EditCardRouteParams = typeof viewCardRouteParams
+export const getEditCardRoute = ({ cardNick }: EditCardRouteParams) => `/cards/${cardNick}/edit`
+
 export const getNewCardRoute = () => '/cards/new'
 
 export const getSignUpRoute = () => '/sign-up'

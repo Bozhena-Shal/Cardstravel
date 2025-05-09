@@ -193,6 +193,9 @@ importers:
       '@trpc/server':
         specifier: ^11.1.2
         version: 11.1.2(typescript@5.8.3)
+      '@types/lodash':
+        specifier: ^4.17.16
+        version: 4.17.16
       classnames:
         specifier: ^2.5.1
         version: 2.5.1
@@ -211,6 +214,9 @@ importers:
       js-cookie:
         specifier: ^3.0.5
         version: 3.0.5
+      lodash:
+        specifier: ^4.17.21
+        version: 4.17.21
       react:
         specifier: ^19.0.0
         version: 19.1.0

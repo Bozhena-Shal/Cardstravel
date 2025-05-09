@@ -37,20 +37,4 @@ export default [
       },
     },
   },
-  {
-    files: ['**/*.{ts,tsx}'], // Правило применяется только к TypeScript-файлам
-    rules: {
-      '@typescript-eslint/no-restricted-imports': [
-        'error',
-        {
-          patterns: [
-            {
-              regex: '^@ideanick/backend/(?!(.*/)?input$).+$',
-              message: 'Импорт из @ideanick/backend разрешен только для файлов input',
-            },
-          ],
-        },
-      ],
-    },
-  },
 ]

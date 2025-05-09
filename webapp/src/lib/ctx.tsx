@@ -1,10 +1,11 @@
-import type { TrpcRouterOutput } from '@cardstravel/backend/src/router'
+import { AppContext } from '@cardstravel/backend/src/lib/ctx'
+//import type { TrpcRouterOutput } from '@cardstravel/backend/src/router'
 import { createContext, useContext } from 'react'
 import { trpc } from './trpc'
 
-export type AppContext = {
-  me: TrpcRouterOutput['getMe']['me']
-}
+// export type AppContext = {
+//   me: TrpcRouterOutput['getMe']['me']
+// }
 
 const AppReactContext = createContext<AppContext>({
   me: null,
