@@ -9,8 +9,8 @@ import { NewCardPage } from './pages/NewCardPage'
 import { SignInPage } from './pages/SignInPage'
 import { SignOutPage } from './pages/SignOutPage'
 import { SignUpPage } from './pages/SingUpPage'
-import { ViewCardsPage } from './pages/ViewCardsPage'
 import './styles/global.scss'
+import { ViewCardPage } from './pages/ViewCardsPage'
 
 export const App = () => {
   return (
@@ -24,7 +24,7 @@ export const App = () => {
               <Route path={routes.getSignInRoute()} element={<SignInPage />} />
               <Route path={routes.getAllCardsRoute()} element={<AllCardsPage />} />
               <Route path={routes.getNewCardRoute()} element={<NewCardPage />} />
-              <Route path={routes.getViewCardsRoute(routes.viewCardRouteParams)} element={<ViewCardsPage />} />
+              <Route path={routes.getViewCardsRoute(routes.viewCardRouteParams)} element={<ViewCardPage />} />
               <Route path={routes.getEditCardRoute(routes.editCardRouteParams)} element={<EditCardPage />} />
             </Route>
           </Routes>

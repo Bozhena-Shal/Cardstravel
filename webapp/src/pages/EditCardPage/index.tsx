@@ -1,4 +1,3 @@
-import type { TrpcRouterOutput } from '@cardstravel/backend/src/router'
 import { zUpdateCardTrpcInput } from '@cardstravel/backend/src/router/updateCard/input'
 import pick from 'lodash/pick'
 import { useNavigate, useParams } from 'react-router-dom'
@@ -8,12 +7,27 @@ import { FormItems } from '../../components/FormItems'
 import { Input } from '../../components/Input'
 import { Segment } from '../../components/Segment'
 import { Textarea } from '../../components/Textarea'
-import { useMe } from '../../lib/ctx'
 import { useForm } from '../../lib/form'
+import { withPageWrapper } from '../../lib/pageWrapper'
 import { getViewCardsRoute, type EditCardRouteParams } from '../../lib/routes'
 import { trpc } from '../../lib/trpc'
 
-const EditCardComponent = ({ card }: { card: NonNullable<TrpcRouterOutput['getCard']['card']> }) => {
+export const EditCardPage = withPageWrapper({
+  authorizedOnly: true,
+  useQuery: () => {
+    const { cardNick } = useParams() as EditCardRouteParams
+    return trpc.getCard.useQuery({
+      cardNick,
+    })
+  },
+  checkExists: ({ queryResult }) => !!queryResult.data.card,
+  checkExistsMessage: 'card not found',
+  checkAccess: ({ queryResult, ctx }) => !!ctx.me && ctx.me.id === queryResult.data.card?.authorId,
+  checkAccessMessage: 'An card can only be edited by the author',
+  setProps: ({ queryResult }) => ({
+    card: queryResult.data.card!,
+  }),
+})(({ card }) => {
   const navigate = useNavigate()
   const updateCard = trpc.updateCard.useMutation()
   const { formik, buttonProps, alertProps } = useForm({
@@ -40,37 +54,4 @@ const EditCardComponent = ({ card }: { card: NonNullable<TrpcRouterOutput['getCa
       </form>
     </Segment>
   )
-}
-
-export const EditCardPage = () => {
-  const { cardNick } = useParams() as EditCardRouteParams
-
-  const getCardResult = trpc.getCard.useQuery({
-    cardNick,
-  })
-  const me = useMe()
-
-  if (getCardResult.isLoading || getCardResult.isFetching) {
-    return <span>Loading...</span>
-  }
-
-  if (getCardResult.isError) {
-    return <span>Error: {getCardResult.error.message}</span>
-  }
-
-  if (!getCardResult.data?.card) {
-    return <span>Card not found</span>
-  }
-
-  const card = getCardResult.data.card
-
-  if (!me) {
-    return <span>Only for authorized</span>
-  }
-
-  if (me.id !== card.authorId) {
-    return <span>An card can only be edited by the author</span>
-  }
-
-  return <EditCardComponent card={card} />
-}
+})
