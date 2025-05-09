@@ -6,6 +6,7 @@ import { TrpcProvider } from './lib/trpc'
 import { AllCardsPage } from './pages/AllCardsPage'
 import { EditCardPage } from './pages/EditCardPage'
 import { NewCardPage } from './pages/NewCardPage'
+import { NotFoundPage } from './pages/NotFoundPage'
 import { SignInPage } from './pages/SignInPage'
 import { SignOutPage } from './pages/SignOutPage'
 import { SignUpPage } from './pages/SingUpPage'
@@ -26,6 +27,7 @@ export const App = () => {
               <Route path={routes.getNewCardRoute()} element={<NewCardPage />} />
               <Route path={routes.getViewCardsRoute(routes.viewCardRouteParams)} element={<ViewCardPage />} />
               <Route path={routes.getEditCardRoute(routes.editCardRouteParams)} element={<EditCardPage />} />
+              <Route path="*" element={<NotFoundPage />} />
             </Route>
           </Routes>
         </BrowserRouter>
