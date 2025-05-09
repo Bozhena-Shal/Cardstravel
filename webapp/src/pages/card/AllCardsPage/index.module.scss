@@ -1,0 +1,18 @@
+@use '../../../styles/vars' as *;
+@use '../../../styles/mixins' as *;
+
+.cards {
+  .card {
+    padding: 20px;
+    border: 1px solid $black;
+    border-radius: 10px;
+
+    & + .card {
+      margin-top: 20px;
+    }
+
+    .cardLink {
+      @include link;
+    }
+  }
+}
