@@ -10,7 +10,7 @@ export const SignOutPage = () => {
   useEffect(() => {
     Cookies.remove('token')
     void trpcUtils.invalidate().then(() => {
-      navigate(getSignInRoute())
+      void navigate(getSignInRoute())
     })
   }, [])
 
