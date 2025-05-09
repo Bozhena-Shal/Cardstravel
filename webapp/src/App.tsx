@@ -9,22 +9,27 @@ import { SignOutPage } from './pages/SignOutPage'
 import { SignUpPage } from './pages/SingUpPage'
 import { ViewCardsPage } from './pages/ViewCardsPage'
 import './styles/global.scss'
+import { EditCardPage } from './pages/EditCardPage'
+import { AppContextProvider } from './lib/ctx'
 
 export const App = () => {
   return (
     <TrpcProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route path={routes.getSignOutRoute()} element={<SignOutPage />} />
-          <Route element={<Layout />}>
-            <Route path={routes.getSignUpRoute()} element={<SignUpPage />} />
-            <Route path={routes.getSignInRoute()} element={<SignInPage />} />
-            <Route path={routes.getAllCardsRoute()} element={<AllCardsPage />} />
-            <Route path={routes.getViewCardsRoute(routes.viewCardRouteParams)} element={<ViewCardsPage />} />
-            <Route path={routes.getNewCardRoute()} element={<NewCardPage />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
+      <AppContextProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path={routes.getSignOutRoute()} element={<SignOutPage />} />
+            <Route element={<Layout />}>
+              <Route path={routes.getSignUpRoute()} element={<SignUpPage />} />
+              <Route path={routes.getSignInRoute()} element={<SignInPage />} />
+              <Route path={routes.getAllCardsRoute()} element={<AllCardsPage />} />
+              <Route path={routes.getViewCardsRoute(routes.viewCardRouteParams)} element={<ViewCardsPage />} />
+              <Route path={routes.getNewCardRoute()} element={<NewCardPage />} />
+              <Route path={routes.getEditCardRoute(routes.editCardRouteParams)} element={<EditCardPage />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </AppContextProvider>
     </TrpcProvider>
   )
 }

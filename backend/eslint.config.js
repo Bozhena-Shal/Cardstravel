@@ -1,18 +1,10 @@
-import baseConfig from '../eslint.config.js'
+import pluginJs from '@eslint/js';
 
-/** @type {import('eslint').Linter.FlatConfig[]} */
 export default [
-  ...baseConfig,
-
+  pluginJs.configs.recommended,
   {
-    files: ['**/*.{ts,js}'],
-    languageOptions: {
-      parserOptions: {
-        project: './tsconfig.json',
-      },
-    },
-  },
-  {
-    ignores: ['dist', 'node_modules', 'coverage', 'eslint.config.js'],
-  },
-]
+    rules: {
+      'no-console': 'error'
+    }
+  }
+];
