@@ -4,13 +4,13 @@ import pick from 'lodash/pick'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Alert } from '../../components/Alert'
 import { Button } from '../../components/Button'
+import { FormItems } from '../../components/FormItems'
 import { Input } from '../../components/Input'
 import { Segment } from '../../components/Segment'
 import { Textarea } from '../../components/Textarea'
 import { useForm } from '../../lib/form'
 import { getViewCardsRoute, type EditCardRouteParams } from '../../lib/routes'
 import { trpc } from '../../lib/trpc'
-import { FormItems } from '../../components/FormItems'
 
 const EditCardComponent = ({ card }: { card: NonNullable<TrpcRouterOutput['getCard']['card']> }) => {
   const navigate = useNavigate()
@@ -20,7 +20,7 @@ const EditCardComponent = ({ card }: { card: NonNullable<TrpcRouterOutput['getCa
     validationSchema: zUpdateCardTrpcInput.omit({ cardId: true }),
     onSubmit: async (values) => {
       await updateCard.mutateAsync({ cardId: card.id, ...values })
-      navigate(getViewCardsRoute({ cardNick: values.nick }))
+      void navigate(getViewCardsRoute({ cardNick: values.nick }))
     },
     resetOnSuccess: false,
     showValidationAlert: true,

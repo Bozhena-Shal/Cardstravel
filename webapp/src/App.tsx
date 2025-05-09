@@ -1,16 +1,16 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { Layout } from './components/Layout'
+import { AppContextProvider } from './lib/ctx'
 import * as routes from './lib/routes'
 import { TrpcProvider } from './lib/trpc'
 import { AllCardsPage } from './pages/AllCardsPage'
+import { EditCardPage } from './pages/EditCardPage'
 import { NewCardPage } from './pages/NewCardPage'
 import { SignInPage } from './pages/SignInPage'
 import { SignOutPage } from './pages/SignOutPage'
 import { SignUpPage } from './pages/SingUpPage'
 import { ViewCardsPage } from './pages/ViewCardsPage'
 import './styles/global.scss'
-import { EditCardPage } from './pages/EditCardPage'
-import { AppContextProvider } from './lib/ctx'
 
 export const App = () => {
   return (

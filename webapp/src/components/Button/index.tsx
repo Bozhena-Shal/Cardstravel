@@ -1,6 +1,6 @@
 import cn from 'classnames'
-import css from './index.module.scss'
 import { Link } from 'react-router-dom'
+import css from './index.module.scss'
 
 export type ButtonProps = { children: React.ReactNode; loading?: boolean }
 export const Button = ({ children, loading = false }: ButtonProps) => {

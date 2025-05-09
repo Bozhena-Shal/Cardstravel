@@ -1,10 +1,10 @@
+import { format } from 'date-fns'
 import { useParams } from 'react-router-dom'
 import { LinkButton } from '../../components/Button'
 import { Segment } from '../../components/Segment'
 import { getEditCardRoute, type ViewCardRouteParams } from '../../lib/routes'
 import { trpc } from '../../lib/trpc'
 import css from './index.module.scss'
-import { format } from 'date-fns'
 
 export const ViewCardsPage = () => {
   const { cardNick } = useParams() as ViewCardRouteParams

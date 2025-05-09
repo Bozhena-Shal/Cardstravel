@@ -25,7 +25,7 @@ export const SignInPage = () => {
       const { token } = await signIn.mutateAsync(values)
       Cookies.set('token', token, { expires: 99999 })
       void trpcUtils.invalidate()
-      navigate(getAllCardsRoute())
+      void navigate(getAllCardsRoute())
     },
     resetOnSuccess: false,
   })

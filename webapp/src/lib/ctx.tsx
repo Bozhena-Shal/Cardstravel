@@ -15,7 +15,7 @@ export const AppContextProvider = ({ children }: { children: React.ReactNode }) 
   return (
     <AppReactContext.Provider
       value={{
-        me: data?.me || null,
+        me: data?.me ?? null,
       }}
     >
       {isLoading || isFetching ? <p>Loading...</p> : isError ? <p>Error: {error.message}</p> : children}
