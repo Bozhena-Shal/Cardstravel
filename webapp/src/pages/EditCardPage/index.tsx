@@ -20,7 +20,7 @@ const EditCardComponent = ({ card }: { card: NonNullable<TrpcRouterOutput['getCa
     validationSchema: zUpdateCardTrpcInput.omit({ cardId: true }),
     onSubmit: async (values) => {
       await updateCard.mutateAsync({ cardId: card.id, ...values })
-      void navigate(getViewCardsRoute({ cardNick: values.nick }))
+      navigate(getViewCardsRoute({ cardNick: values.nick }))
     },
     resetOnSuccess: false,
     showValidationAlert: true,
