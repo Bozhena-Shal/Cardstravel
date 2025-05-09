@@ -25,7 +25,7 @@ export const NewCardPage = withPageWrapper({
       await createCard.mutateAsync(values)
       formik.resetForm()
     },
-    successMessage: 'Idea created!',
+    successMessage: 'Card created!',
     showValidationAlert: true,
   })
 
@@ -43,7 +43,7 @@ export const NewCardPage = withPageWrapper({
           <Input name="description" label="Description" formik={formik} maxWidth={500} />
           <Textarea name="text" label="Text" formik={formik} />
           <Alert {...alertProps} />
-          <Button {...buttonProps}>Create Idea</Button>
+          <Button {...buttonProps}>Create Card</Button>
         </FormItems>
       </form>
     </Segment>

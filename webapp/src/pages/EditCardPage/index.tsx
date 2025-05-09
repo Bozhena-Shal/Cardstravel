@@ -20,13 +20,13 @@ export const EditCardPage = withPageWrapper({
       cardNick,
     })
   },
-  checkExists: ({ queryResult }) => !!queryResult.data.card,
-  checkExistsMessage: 'card not found',
-  checkAccess: ({ queryResult, ctx }) => !!ctx.me && ctx.me.id === queryResult.data.card?.authorId,
-  checkAccessMessage: 'An card can only be edited by the author',
-  setProps: ({ queryResult }) => ({
-    card: queryResult.data.card!,
-  }),
+  setProps: ({ queryResult, ctx, checkExists, checkAccess }) => {
+    const card = checkExists(queryResult.data.card, 'Card not found')
+    checkAccess(ctx.me?.id === card.authorId, 'An card can only be edited by the author')
+    return {
+      card,
+    }
+  },
 })(({ card }) => {
   const navigate = useNavigate()
   const updateCard = trpc.updateCard.useMutation()

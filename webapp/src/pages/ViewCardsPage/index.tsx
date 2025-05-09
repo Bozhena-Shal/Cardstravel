@@ -14,10 +14,9 @@ export const ViewCardPage = withPageWrapper({
       cardNick,
     })
   },
-  checkExists: ({ queryResult }) => !!queryResult.data.card,
-  checkExistsMessage: 'Card not found',
-  setProps: ({ queryResult, ctx }) => ({
-    card: queryResult.data.card!,
+  setProps: ({ queryResult, checkExists, ctx }) => ({
+    card: checkExists(queryResult.data.card, 'Card not found'),
+
     me: ctx.me,
   }),
 })(({ card, me }) => (
