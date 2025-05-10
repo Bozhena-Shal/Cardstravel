@@ -59,7 +59,9 @@ export const AllCardsPage = () => {
                       </Link>
                     }
                     description={card.description}
-                  />
+                  >
+                    Likes: {card.likesCount}
+                  </Segment>
                 </div>
               ))}
           </InfiniteScroll>

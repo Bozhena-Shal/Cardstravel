@@ -10,6 +10,7 @@ import { updateProfileTrpcRoute } from './auth/updateProfile/index.js'
 import { createCardTrpcRoute } from './card/createCard/index.js'
 import { getCardTrpcRoute } from './card/getCard/index.js'
 import { getCardsTrpcRoute } from './card/getCards/index.js'
+import { setCardLikeTrpcRoute } from './card/setCardLike/index.js'
 import { updateCardTrpcRoute } from './card/updateCard/index.js'
 // @endindex
 
@@ -23,6 +24,7 @@ export const trpcRouter = trpc.router({
   createCard: createCardTrpcRoute,
   getCard: getCardTrpcRoute,
   getCards: getCardsTrpcRoute,
+  setCardLike: setCardLikeTrpcRoute,
   updateCard: updateCardTrpcRoute,
   // @endindex
 })

@@ -8,23 +8,35 @@ datasource db {
 }
 
 model User {
-  id          String @id @default(uuid())
-  nick        String @unique
-  name        String @default("")
-  password    String
-  creatAt     DateTime @default(now())
-  cards        Card[]
+  id         String     @id @default(uuid())
+  nick       String     @unique
+  name       String     @default("")
+  password   String
+  createdAt  DateTime   @default(now())
+  cards      Card[]
+  cardsLikes CardLike[]
 }
 
 model Card {
-  id           String   @id @default(uuid())
-  nick         String   @unique
-  serialNumber Int      @unique @default(autoincrement())
+  id           String     @id @default(uuid())
+  nick         String     @unique
+  serialNumber Int        @unique @default(autoincrement())
   name         String
   description  String
   text         String
-  createdAt    DateTime @default(now())
+  createdAt    DateTime   @default(now())
   authorId     String
-  author       User     @relation(fields: [authorId], references: [id])
+  author       User       @relation(fields: [authorId], references: [id])
+  cardsLikes   CardLike[]
+}
 
+model CardLike {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  card      Card     @relation(fields: [cardId], references: [id])
+  cardId    String
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+
+  @@unique([cardId, userId])
 }
