@@ -1,19 +1,22 @@
 import { Link } from 'react-router-dom'
+import { Alert } from '../../../components/Alert'
 import { Segment } from '../../../components/Segment'
 import { getViewCardsRoute } from '../../../lib/routes'
 import { trpc } from '../../../lib/trpc'
 import css from './index.module.scss'
 
 export const AllCardsPage = () => {
-  const { data, error, isLoading, isFetching, isError } = trpc.getCards.useQuery()
-
-  if (isLoading || isFetching) {
-    return <span>Loading...</span>
-  }
-
-  if (isError) {
-    return <span>Error: {error.message}</span>
-  }
+  const { data, error, isLoading, isError, hasNextPage, fetchNextPage, isFetchingNextPage, isRefetching } =
+    trpc.getCards.useInfiniteQuery(
+      {
+        limit: 2,
+      },
+      {
+        getNextPageParam: (lastPage) => {
+          return lastPage.nextCursor
+        },
+      }
+    )
 
   if (!data) {
     return <span>No data available.</span>
@@ -21,21 +24,41 @@ export const AllCardsPage = () => {
 
   return (
     <Segment title="All Cards">
-      <div className={css.cards}>
-        {data.cards.map((card) => (
-          <div className={css.card} key={card.nick}>
-            <Segment
-              size={2}
-              title={
-                <Link className={css.cardLink} to={getViewCardsRoute({ cardNick: card.nick })}>
-                  {card.name}
-                </Link>
-              }
-              description={card.description}
-            />
+      {isLoading || isRefetching ? (
+        <div>Loading...</div>
+      ) : isError ? (
+        <Alert color="red">{error.message}</Alert>
+      ) : (
+        <div className={css.cards}>
+          {data.pages
+            .flatMap((page) => page.cards)
+            .map((card) => (
+              <div className={css.card} key={card.nick}>
+                <Segment
+                  size={2}
+                  title={
+                    <Link className={css.cardLink} to={getViewCardsRoute({ cardNick: card.nick })}>
+                      {card.name}
+                    </Link>
+                  }
+                  description={card.description}
+                />
+              </div>
+            ))}
+          <div className={css.more}>
+            {hasNextPage && !isFetchingNextPage && (
+              <button
+                onClick={() => {
+                  void fetchNextPage()
+                }}
+              >
+                Load more
+              </button>
+            )}
+            {isFetchingNextPage && <span>Loading...</span>}
           </div>
-        ))}
-      </div>
+        </div>
+      )}
     </Segment>
   )
 }
