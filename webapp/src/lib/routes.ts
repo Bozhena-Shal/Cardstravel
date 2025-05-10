@@ -13,6 +13,8 @@ export const getEditCardRoute = ({ cardNick }: EditCardRouteParams) => `/cards/$
 
 export const getNewCardRoute = () => '/cards/new'
 
+export const getEditProfileRoute = () => '/edit-profile'
+
 export const getSignUpRoute = () => '/sign-up'
 
 export const getSignInRoute = () => '/sign-in'

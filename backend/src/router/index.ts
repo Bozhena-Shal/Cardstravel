@@ -5,6 +5,7 @@ import { trpc } from '../lib/trpc.js'
 import { getMeTrpcRoute } from './auth/getMe/index.js'
 import { signInTrpcRoute } from './auth/signIn/index.js'
 import { signUpTrpcRoute } from './auth/signUp/index.js'
+import { updateProfileTrpcRoute } from './auth/updateProfile/index.js'
 import { createCardTrpcRoute } from './card/createCard/index.js'
 import { getCardTrpcRoute } from './card/getCard/index.js'
 import { getCardsTrpcRoute } from './card/getCards/index.js'
@@ -16,6 +17,7 @@ export const trpcRouter = trpc.router({
   getMe: getMeTrpcRoute,
   signIn: signInTrpcRoute,
   signUp: signUpTrpcRoute,
+  updateProfile: updateProfileTrpcRoute,
   createCard: createCardTrpcRoute,
   getCard: getCardTrpcRoute,
   getCards: getCardsTrpcRoute,
