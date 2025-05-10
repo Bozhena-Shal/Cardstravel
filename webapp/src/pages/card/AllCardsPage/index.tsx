@@ -2,6 +2,7 @@ import InfiniteScroll from 'react-infinite-scroller'
 import { Link } from 'react-router-dom'
 import { Alert } from '../../../components/Alert'
 import { layoutContentElRef } from '../../../components/Layout'
+import { Loader } from '../../../components/Loader/index'
 import { Segment } from '../../../components/Segment'
 import { getViewCardsRoute } from '../../../lib/routes'
 import { trpc } from '../../../lib/trpc'
@@ -25,7 +26,7 @@ export const AllCardsPage = () => {
   return (
     <Segment title="All Cards">
       {isLoading || isRefetching ? (
-        <div>Loading...</div>
+        <Loader type="section" />
       ) : isError ? (
         <Alert color="red">{error.message}</Alert>
       ) : (
@@ -40,7 +41,7 @@ export const AllCardsPage = () => {
             hasMore={hasNextPage}
             loader={
               <div className={css.more} key="loader">
-                Loading...
+                <Loader type="section" />
               </div>
             }
             getScrollParent={() => layoutContentElRef.current}

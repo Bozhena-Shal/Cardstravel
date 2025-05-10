@@ -1,6 +1,6 @@
 import { format } from 'date-fns/format'
 import { useParams } from 'react-router-dom'
-import { LinkButton } from '../../../components/Button'
+import { LinkButton } from '../../../components/Button/index'
 import { Segment } from '../../../components/Segment'
 import { withPageWrapper } from '../../../lib/pageWrapper'
 import { getEditCardRoute, type ViewCardRouteParams } from '../../../lib/routes'
