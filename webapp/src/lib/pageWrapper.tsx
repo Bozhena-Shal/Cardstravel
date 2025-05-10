@@ -21,6 +21,8 @@ const checkAccessFn = <T,>(value: T, message?: string): void => {
   }
 }
 
+class GetAuthorizedMeError extends Error {}
+
 type Props = Record<string, unknown>
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type QueryResult = UseTRPCQueryResult<any, any>
@@ -35,6 +37,7 @@ type HelperProps<TQueryResult extends QueryResult | undefined> = {
 type SetPropsProps<TQueryResult extends QueryResult | undefined> = HelperProps<TQueryResult> & {
   checkExists: typeof checkExistsFn
   checkAccess: typeof checkAccessFn
+  getAuthorizedMe: (message?: string) => NonNullable<AppContext['me']>
 }
 type PageWrapperProps<TProps extends Props, TQueryResult extends QueryResult | undefined> = {
   redirectAuthorized?: boolean
@@ -112,8 +115,20 @@ const PageWrapper = <TProps extends Props = {}, TQueryResult extends QueryResult
     }
   }
 
+  const getAuthorizedMe = (message?: string) => {
+    if (!ctx.me) {
+      throw new GetAuthorizedMeError(message)
+    }
+    return ctx.me
+  }
+
   try {
-    const props = setProps?.({ ...helperProps, checkExists: checkExistsFn, checkAccess: checkAccessFn }) as TProps
+    const props = setProps?.({
+      ...helperProps,
+      checkExists: checkExistsFn,
+      checkAccess: checkAccessFn,
+      getAuthorizedMe,
+    }) as TProps
     return <Page {...props} />
   } catch (error) {
     if (error instanceof CheckExistsError) {
