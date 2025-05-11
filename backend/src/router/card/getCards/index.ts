@@ -3,6 +3,8 @@ import { trpc } from '../../../lib/trpc.js'
 import { zGetCardsTrpcInput } from './input.js'
 
 export const getCardsTrpcRoute = trpc.procedure.input(zGetCardsTrpcInput).query(async ({ ctx, input }) => {
+  // const normalizedSearch = input.search ? input.search.trim().replace(/[\s\n\t]/g, '_') : undefined
+  const normalizedSearch = input.search ? input.search.trim().replace(/[\s\n\t]/g, ' & ') : undefined
   const rawCards = await ctx.prisma.card.findMany({
     select: {
       id: true,
@@ -16,6 +18,27 @@ export const getCardsTrpcRoute = trpc.procedure.input(zGetCardsTrpcInput).query(
         },
       },
     },
+    where: !input.search
+      ? undefined
+      : {
+          OR: [
+            {
+              name: {
+                search: normalizedSearch,
+              },
+            },
+            {
+              description: {
+                search: normalizedSearch,
+              },
+            },
+            {
+              text: {
+                search: normalizedSearch,
+              },
+            },
+          ],
+        },
     orderBy: [
       {
         createdAt: 'desc',
