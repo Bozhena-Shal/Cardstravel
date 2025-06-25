@@ -2,6 +2,7 @@ import { type UseTRPCQueryResult, type UseTRPCQuerySuccessResult } from '@trpc/r
 import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ErrorPageComponent } from '../components/ErrorPageComponent'
+import { Loader } from '../components/Loader'
 import { NotFoundPage } from '../pages/other/NotFoundPage'
 import { useAppContext, type AppContext } from './ctx'
 import { getAllCardsRoute } from './routes'
@@ -54,6 +55,8 @@ type PageWrapperProps<TProps extends Props, TQueryResult extends QueryResult | u
   checkExistsTitle?: string
   checkExistsMessage?: string
 
+  showLoaderOnFetching?: boolean
+
   useQuery?: () => TQueryResult
   setProps?: (setPropsProps: SetPropsProps<TQueryResult>) => TProps
   Page: React.FC<TProps>
@@ -74,6 +77,7 @@ const PageWrapper = <TProps extends Props = {}, TQueryResult extends QueryResult
   useQuery,
   setProps,
   Page,
+  showLoaderOnFetching = true,
 }: PageWrapperProps<TProps, TQueryResult>) => {
   const navigate = useNavigate()
   const ctx = useAppContext()
@@ -87,8 +91,8 @@ const PageWrapper = <TProps extends Props = {}, TQueryResult extends QueryResult
     }
   }, [redirectNeeded, navigate])
 
-  if (queryResult?.isLoading || queryResult?.isFetching || redirectNeeded) {
-    return <p>Loading...</p>
+  if (queryResult?.isLoading || (showLoaderOnFetching && queryResult?.isFetching) || redirectNeeded) {
+    return <Loader type="page" />
   }
 
   if (queryResult?.isError) {

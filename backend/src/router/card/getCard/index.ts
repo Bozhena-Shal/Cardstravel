@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import { z } from 'zod'
 import { trpc } from '../../../lib/trpc.js'
 
@@ -8,7 +9,7 @@ export const getCardTrpcRoute = trpc.procedure
     })
   )
   .query(async ({ ctx, input }) => {
-    const card = await ctx.prisma.card.findUnique({
+    const rawCard = await ctx.prisma.card.findUnique({
       where: {
         nick: input.cardNick,
       },
@@ -20,12 +21,25 @@ export const getCardTrpcRoute = trpc.procedure
             name: true,
           },
         },
+        cardsLikes: {
+          select: {
+            id: true,
+          },
+          where: {
+            userId: ctx.me?.id,
+          },
+        },
+        _count: {
+          select: {
+            cardsLikes: true,
+          },
+        },
       },
     })
 
-    if (!card) {
-      throw new Error('Card not found')
-    }
+    const isLikedByMe = !!rawCard?.cardsLikes.length
+    const likesCount = rawCard?._count.cardsLikes || 0
+    const card = rawCard && { ..._.omit(rawCard, ['cardsLikes', '_count']), isLikedByMe, likesCount }
 
     return { card }
   })
