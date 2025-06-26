@@ -1,7 +1,13 @@
 generator client {
+<<<<<<< HEAD
   provider = "prisma-client-js"
   previewFeatures = ["fullTextSearchPostgres"]
 
+=======
+  provider        = "prisma-client-js"
+  previewFeatures = ["fullTextSearchPostgres"]
+  output          = "../node_modules/.prisma/client"
+>>>>>>> 01dec430e65042a491e85e7a49946307865713a9
 }
 
 datasource db {
@@ -10,6 +16,7 @@ datasource db {
 }
 
 model User {
+<<<<<<< HEAD
   id          String @id @default(uuid())
   nick        String @unique
   name        String @default("")
@@ -23,20 +30,34 @@ model User {
 enum UserPermission {
   BLOCK_CARDS
   ALL
+=======
+  id         String     @id @default(uuid())
+  nick       String     @unique
+  name       String     @default("")
+  password   String
+  createdAt  DateTime   @default(now())
+  cards      Card[]
+  cardsLikes CardLike[]
+>>>>>>> 01dec430e65042a491e85e7a49946307865713a9
 }
 
 model Card {
-  id           String   @id @default(uuid())
-  nick         String   @unique
-  serialNumber Int      @unique @default(autoincrement())
+  id           String     @id @default(uuid())
+  nick         String     @unique
+  serialNumber Int        @unique @default(autoincrement())
   name         String
   description  String
   text         String
-  createdAt    DateTime @default(now())
+  createdAt    DateTime   @default(now())
   authorId     String
+<<<<<<< HEAD
   author       User     @relation(fields: [authorId], references: [id])
   cardsLikes   CardLike[]
   blockedAt    DateTime?
+=======
+  author       User       @relation(fields: [authorId], references: [id])
+  cardsLikes   CardLike[]
+>>>>>>> 01dec430e65042a491e85e7a49946307865713a9
 }
 
 model CardLike {

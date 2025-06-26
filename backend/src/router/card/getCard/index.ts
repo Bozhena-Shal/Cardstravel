@@ -18,7 +18,6 @@ export const getCardTrpcRoute = trpc.procedure
           select: {
             id: true,
             nick: true,
-            name: true,
           },
         },
         cardsLikes: {
