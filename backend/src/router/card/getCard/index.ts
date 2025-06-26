@@ -36,7 +36,9 @@ export const getCardTrpcRoute = trpc.procedure
         },
       },
     })
-
+    if (rawCard?.blockedAt) {
+      throw new Error('Card is blocked by administrator')
+    }
     const isLikedByMe = !!rawCard?.cardsLikes.length
     const likesCount = rawCard?._count.cardsLikes || 0
     const card = rawCard && { ..._.omit(rawCard, ['cardsLikes', '_count']), isLikedByMe, likesCount }

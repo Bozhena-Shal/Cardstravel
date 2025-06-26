@@ -3,6 +3,8 @@ import { trpc } from '../../../lib/trpc.js'
 import { zGetCardsTrpcInput } from './input.js'
 
 export const getCardsTrpcRoute = trpc.procedure.input(zGetCardsTrpcInput).query(async ({ ctx, input }) => {
+  // const normalizedSearch = input.search ? input.search.trim().replace(/[\s\n\t]/g, '_') : undefined
+  const normalizedSearch = input.search ? input.search.trim().replace(/[\s\n\t]/g, ' & ') : undefined
   const rawCards = await ctx.prisma.card.findMany({
     select: {
       id: true,
@@ -15,6 +17,30 @@ export const getCardsTrpcRoute = trpc.procedure.input(zGetCardsTrpcInput).query(
           cardsLikes: true,
         },
       },
+    },
+    where: {
+      blockedAt: null,
+      ...(!normalizedSearch
+        ? {}
+        : {
+            OR: [
+              {
+                name: {
+                  search: normalizedSearch,
+                },
+              },
+              {
+                description: {
+                  search: normalizedSearch,
+                },
+              },
+              {
+                text: {
+                  search: normalizedSearch,
+                },
+              },
+            ],
+          }),
     },
     orderBy: [
       {
@@ -29,8 +55,8 @@ export const getCardsTrpcRoute = trpc.procedure.input(zGetCardsTrpcInput).query(
   })
   const nextCard = rawCards.at(input.limit)
   const nextCursor = nextCard?.serialNumber
-  const rawIdeasExceptNext = rawCards.slice(0, input.limit)
-  const cardsExceptNext = rawIdeasExceptNext.map((card) => ({
+  const rawCardsExceptNext = rawCards.slice(0, input.limit)
+  const cardsExceptNext = rawCardsExceptNext.map((card) => ({
     ..._.omit(card, ['_count']),
     likesCount: card._count.cardsLikes,
   }))

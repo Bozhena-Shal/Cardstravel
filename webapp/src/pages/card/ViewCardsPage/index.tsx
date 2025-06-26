@@ -1,8 +1,12 @@
 import type { TrpcRouterOutput } from '@cardstravel/backend/src/router'
+import { canBlockCards, canEditCard } from '@cardstravel/backend/src/utils/can'
 import { format } from 'date-fns/format'
 import { useParams } from 'react-router-dom'
-import { LinkButton } from '../../../components/Button'
+import { Alert } from '../../../components/Alert'
+import { Button, LinkButton } from '../../../components/Button'
+import { FormItems } from '../../../components/FormItems'
 import { Segment } from '../../../components/Segment'
+import { useForm } from '../../../lib/form'
 import { withPageWrapper } from '../../../lib/pageWrapper'
 import { getEditCardRoute, type ViewCardRouteParams } from '../../../lib/routes'
 import { trpc } from '../../../lib/trpc'
@@ -41,6 +45,27 @@ const LikeButton = ({ card }: { card: NonNullable<TrpcRouterOutput['getCard']['c
   )
 }
 
+const BlockCard = ({ card }: { card: NonNullable<TrpcRouterOutput['getCard']['card']> }) => {
+  const blockCard = trpc.blockCard.useMutation()
+  const trpcUtils = trpc.useContext()
+  const { formik, alertProps, buttonProps } = useForm({
+    onSubmit: async () => {
+      await blockCard.mutateAsync({ cardId: card.id })
+      await trpcUtils.getCard.refetch({ cardNick: card.nick })
+    },
+  })
+  return (
+    <form onSubmit={formik.handleSubmit}>
+      <FormItems>
+        <Alert {...alertProps} />
+        <Button color="red" {...buttonProps}>
+          Block Card
+        </Button>
+      </FormItems>
+    </form>
+  )
+}
+
 export const ViewCardPage = withPageWrapper({
   useQuery: () => {
     const { cardNick } = useParams() as ViewCardRouteParams
@@ -68,9 +93,14 @@ export const ViewCardPage = withPageWrapper({
         </>
       )}
     </div>
-    {me?.id === card.authorId && (
+    {canEditCard(me, card) && (
       <div className={css.editButton}>
         <LinkButton to={getEditCardRoute({ cardNick: card.nick })}>Edit Card</LinkButton>
+      </div>
+    )}
+    {canBlockCards(me) && (
+      <div className={css.blockCard}>
+        <BlockCard card={card} />
       </div>
     )}
   </Segment>

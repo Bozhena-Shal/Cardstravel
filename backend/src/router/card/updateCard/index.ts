@@ -1,4 +1,5 @@
 import { trpc } from '../../../lib/trpc.js'
+import { canEditCard } from '../../../utils/can.js'
 import { zUpdateCardTrpcInput } from './input.js'
 
 export const updateCardTrpcRoute = trpc.procedure.input(zUpdateCardTrpcInput).mutation(async ({ ctx, input }) => {
@@ -14,7 +15,7 @@ export const updateCardTrpcRoute = trpc.procedure.input(zUpdateCardTrpcInput).mu
   if (!card) {
     throw new Error('NOT_FOUND')
   }
-  if (ctx.me.id !== card.authorId) {
+  if (!canEditCard(ctx.me, card)) {
     throw new Error('NOT_YOUR_CARD')
   }
   if (card.nick !== input.nick) {

@@ -7,6 +7,7 @@ import { signInTrpcRoute } from './auth/signIn/index.js'
 import { signUpTrpcRoute } from './auth/signUp/index.js'
 import { updatePasswordTrpcRoute } from './auth/updatePassword/index.js'
 import { updateProfileTrpcRoute } from './auth/updateProfile/index.js'
+import { blockCardTrpcRoute } from './card/blockCard/index.js'
 import { createCardTrpcRoute } from './card/createCard/index.js'
 import { getCardTrpcRoute } from './card/getCard/index.js'
 import { getCardsTrpcRoute } from './card/getCards/index.js'
@@ -20,6 +21,7 @@ export const trpcRouter = trpc.router({
   signIn: signInTrpcRoute,
   signUp: signUpTrpcRoute,
   updatePassword: updatePasswordTrpcRoute,
+  blockCard: blockCardTrpcRoute,
   updateProfile: updateProfileTrpcRoute,
   createCard: createCardTrpcRoute,
   setCardLike: setCardLikeTrpcRoute,

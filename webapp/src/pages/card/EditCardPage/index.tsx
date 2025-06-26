@@ -1,4 +1,5 @@
 import { zUpdateCardTrpcInput } from '@cardstravel/backend/src/router/card/updateCard/input'
+import { canEditCard } from '@cardstravel/backend/src/utils/can'
 import pick from 'lodash/pick'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Alert } from '../../../components/Alert'
@@ -22,7 +23,7 @@ export const EditCardPage = withPageWrapper({
   },
   setProps: ({ queryResult, ctx, checkExists, checkAccess }) => {
     const card = checkExists(queryResult.data.card, 'Card not found')
-    checkAccess(ctx.me?.id === card.authorId, 'An card can only be edited by the author')
+    checkAccess(canEditCard(ctx.me, card), 'An card can only be edited by the author')
     return {
       card,
     }
